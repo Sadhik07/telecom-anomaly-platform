@@ -4,7 +4,6 @@
 ![Python](https://img.shields.io/badge/python-3.11-3776ab)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.x-ee4c2c)
 ![ONNX Runtime](https://img.shields.io/badge/ONNX%20Runtime-FP16-005ce6)
-![License](https://img.shields.io/badge/license-MIT-green)
 
 End-to-end pipeline that ingests streaming KPI telemetry from a fleet of distributed
 cell sites, flags anomalies with **STL decomposition + adaptive robust z-score**,
@@ -119,5 +118,4 @@ tests/                 # CPU smoke + correctness tests
 ```
 
 ## License
-
-MIT — see [LICENSE](LICENSE).
+Sadhik — see [LICENSE](LICENSE).
