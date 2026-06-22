@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NetSentry — Telecom Anomaly & Outage Forecasting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="scanline"></div>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">◢◤</span>
+      <div>
+        <h1>NetSentry</h1>
+        <p>Real-time telecom anomaly detection &amp; multi-horizon outage forecasting</p>
+      </div>
+    </div>
+    <div class="status">
+      <div class="chip"><label>Fleet</label><span id="siteCount">500</span> sites</div>
+      <div class="chip"><label>Sampling</label>5 min</div>
+      <div class="chip live"><span class="dot"></span><span id="clock">--:--:--</span></div>
+    </div>
+  </header>
+
+  <nav class="pipeline" aria-label="processing pipeline">
+    <div class="stage" data-stage="0"><b>01</b> Telemetry ingest</div>
+    <div class="arrow">→</div>
+    <div class="stage" data-stage="1"><b>02</b> STL + z-score</div>
+    <div class="arrow">→</div>
+    <div class="stage" data-stage="2"><b>03</b> TFT forecast</div>
+    <div class="arrow">→</div>
+    <div class="stage" data-stage="3"><b>04</b> GNN root-cause</div>
+  </nav>
+
+  <main class="grid">
+    <section class="panel wide">
+      <div class="panel-head">
+        <h2>Live KPI stream — <span id="focusSite" class="mono">site #047</span></h2>
+        <div class="legend">
+          <span class="k lat">latency</span>
+          <span class="k jit">jitter</span>
+          <span class="k loss">loss</span>
+          <span class="k thr">throughput</span>
+        </div>
+      </div>
+      <canvas id="wave" height="260"></canvas>
+      <div class="readout" id="readout"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>Outage forecast</h2></div>
+      <p class="sub">Predicted latency vs. SLA ceiling (45 ms)</p>
+      <ul class="horizons" id="horizons"></ul>
+      <div class="verdict" id="verdict">Monitoring…</div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>Fault propagation</h2></div>
+      <p class="sub">GNN over Neo4j topology — common-cause ranking</p>
+      <svg id="topo" viewBox="0 0 360 220" role="img" aria-label="network topology"></svg>
+      <div class="rootcause" id="rootcause"></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>Browser simulation of the production pipeline. Models train in
+      <code>src/</code> · served via FastAPI + ONNX Runtime.</span>
+    <a id="repoLink" href="https://github.com/Sadhik07/telecom-anomaly-platform">Source ↗</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
